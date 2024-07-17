@@ -1,0 +1,143 @@
+مرحله ۱: ایجاد دایرکتوری‌ها
+
+ابتدا یک فایل ایجاد کنید و دو دایرکتوری به نام‌های backend و front بسازید:
+
+
+├───backend
+└───front
+
+
+مرحله ۲: راه‌اندازی پروژه Django
+
+در دایرکتوری backend یک Command Prompt باز کرده و دستورات زیر را به ترتیب وارد کنید:
+
+
+
+python -m venv venv
+
+.\venv\scripts\activate
+
+pip install -r requirements.txt
+
+django-admin startproject muzicPlayer .
+
+
+
+سپس فایل‌های موجود در مخزن GitHub را دانلود کرده و به دایرکتوری backend اضافه کنید. ساختار دایرکتوری باید به صورت زیر باشد:
+
+├───backend
+│   ├───files
+│   ├───muzicPlayer
+│   └───venv
+└───front
+
+
+
+مرحله ۳: ویرایش فایل settings.py
+
+فایل settings.py را باز کرده و تغییرات زیر را اعمال کنید:
+
+python
+
+import os
+
+INSTALLED_APPS = [
+    # به این قسمت اضافه کنید
+    ...
+    "corsheaders",
+    "rest_framework",
+    "rest_framework.authtoken",
+    "files",
+    ...
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000"
+]
+
+MIDDLEWARE = [
+    # به این قسمت اضافه کنید
+    ...
+    "corsheaders.middleware.CorsMiddleware",
+    ...
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+مرحله ۴: ویرایش فایل urls.py
+
+فایل urls.py را باز کرده و تغییرات زیر را اعمال کنید:
+
+
+
+from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('files.urls')),
+    # سایر URL ها
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+مرحله ۵: مهاجرت و اجرای سرور
+
+دستورات مربوط به مهاجرت و اجرای سرور را اجرا کنید تا مطمئن شوید که پروژه backend شما به خوبی کار می‌کند:
+
+
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+python manage.py runserver 8080
+
+
+
+مرحله ۶: راه‌اندازی پروژه React
+
+به دایرکتوری front بروید و یک Command Prompt باز کرده و دستورات زیر را به ترتیب وارد کنید:
+
+
+
+npx create-react-app muzic
+
+cd muzic
+
+npm i bootstrap react-bootstrap axios yup date-fns react-router-dom
+
+
+
+سپس فایل src را از مخزن GitHub دانلود کرده و با فایل src موجود در دایرکتوری خود جایگزین کنید:
+
+
+├───backend
+│   ├───files
+│   ├───muzicPlayer
+│   └───venv
+└───front
+    ├───node_modules
+    ├───public
+    └───src
+
+
+
+نکات مهم
+
+    سرور Django شما باید حتماً در پورت 8080 اجرا شود تا به درستی کار کند.
+    React باید در پورت 3000 باز شود.
