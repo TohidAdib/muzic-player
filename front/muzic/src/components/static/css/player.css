@@ -1,0 +1,46 @@
+.icon{
+    width: 1.2rem;
+    height: 1.2rem;
+    color: blue;
+    cursor: pointer;
+}
+
+.custom-range {
+    -webkit-appearance: none; /* حذف استایل پیش‌فرض */
+    width: 100%; /* عرض کامل */
+    height: 5px; /* ارتفاع نازک‌تر */
+    background: #ddd; /* رنگ پس‌زمینه */
+    outline: none; /* حذف خط حاشیه */
+    opacity: 0.7; /* شفافیت */
+    border-radius: 5px;
+    transition: opacity .15s ease-in-out; /* انیمیشن تغییر شفافیت */
+}
+
+/* تغییر شفافیت هنگام هاور */
+.custom-range:hover {
+    opacity: 1;
+}
+
+/* استایل دستگیره (thumb) */
+.custom-range::-webkit-slider-thumb {
+    -webkit-appearance: none; /* حذف استایل پیش‌فرض */
+    appearance: none;
+    width: 15px; /* عرض دستگیره */
+    height: 15px; /* ارتفاع دستگیره */
+    background: #4CAF50; /* رنگ دستگیره */
+    cursor: pointer; /* نشانگر دست */
+    border-radius: 50%; /* گرد کردن دستگیره */
+}
+
+/* برای مرورگرهای فایرفاکس */
+.custom-range::-moz-range-thumb {
+    width: 15px; /* عرض دستگیره */
+    height: 15px; /* ارتفاع دستگیره */
+    background: #4CAF50; /* رنگ دستگیره */
+    cursor: pointer; /* نشانگر دست */
+    border-radius: 50%; /* گرد کردن دستگیره */
+}
+
+.padent_div{
+    background-color: rgba(127, 255, 212, 0.342);
+}

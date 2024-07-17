@@ -1,0 +1,9 @@
+venv
+media
+muzicplayer
+manage.py
+db.sqlite3
+node_modules
+package-lock.json
+package.json
+public
